@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,20 +23,28 @@ import com.javainuse.service.JwtUserDetailsService;
 public class HelloWorldController {
 
 	@Autowired
+	private ObjectMapper objectMapper;
+	@Autowired
 	private UserRepository userRepository;
 
-	@RequestMapping({ "/user/{username}/{token}" })
+	@GetMapping({ "/user/{username}/{token}" })
 	public ResponseEntity user(@PathVariable("username") String username, @PathVariable("token") String token) {
 		JwtRequest user = userRepository.findByUsername(username);
-		if (user.getToken().equals(token)) {
-//			ObjectNode jsonObject = objectMapper.createObjectNode();
-//			jsonObject.put("statusCode", 200);
-//			jsonObject.put("message", "Success");
-			return new ResponseEntity(user, HttpStatus.OK);
-		} else {
-			ErrorResponse errRes = new ErrorResponse("InvalidToken");
-			return new ResponseEntity(errRes, HttpStatus.BAD_REQUEST);
+		if(user != null) {
+			user.setPassword(null);
+			if (user.getToken().equals(token)) {
+				return new ResponseEntity(user, HttpStatus.OK);
+			} else {
+				ErrorResponse errRes = new ErrorResponse("InvalidToken");
+				return new ResponseEntity(errRes, HttpStatus.BAD_REQUEST);
+			}
+		}else {
+			ObjectNode jsonObject = objectMapper.createObjectNode();
+			jsonObject.put("statusCode", 404);
+			jsonObject.put("message", "User Not Found");
+			return new ResponseEntity(jsonObject, HttpStatus.NOT_FOUND);
 		}
+		
 	}
 
 }

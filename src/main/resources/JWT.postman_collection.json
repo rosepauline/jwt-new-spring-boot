@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "c83ff305-e613-4c30-8534-471d830fe817",
+		"name": "JWT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5919510"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/rose/eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb3NlIiwiZXhwIjoxNjU5MzU1NTExLCJpYXQiOjE2NTkzMzc1MTF9.lXCR2-4VjX_btK12c0AuaKYnWfkdFER_ea6i2-itbET4xVp6w9FppyYtT1CmQBxi5cqvUi-P02dXI0X2sBhcOw",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"rose",
+						"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb3NlIiwiZXhwIjoxNjU5MzU1NTExLCJpYXQiOjE2NTkzMzc1MTF9.lXCR2-4VjX_btK12c0AuaKYnWfkdFER_ea6i2-itbET4xVp6w9FppyYtT1CmQBxi5cqvUi-P02dXI0X2sBhcOw"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"pauline1\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
